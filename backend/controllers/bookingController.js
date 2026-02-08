@@ -1,7 +1,7 @@
 const Booking = require('../models/Booking');
 const Car = require('../models/Car');
 
-// @desc    Create a new booking
+
 exports.createBooking = async (req, res) => {
     try {
         const { car, startDate, endDate, pickupLocation } = req.body;
@@ -14,7 +14,7 @@ exports.createBooking = async (req, res) => {
         const end = new Date(endDate);
         if (end <= start) return res.status(400).json({ msg: "End date must be after start date" });
 
-        // Overlap Check
+        
         const overlapping = await Booking.findOne({
             car,
             $or: [{ startDate: { $lte: end }, endDate: { $gte: start } }]
@@ -36,7 +36,7 @@ exports.createBooking = async (req, res) => {
     }
 };
 
-// @desc    Get bookings for a specific user (Used in profile.html)
+
 exports.getUserBookings = async (req, res) => {
     try {
         const bookings = await Booking.find({ user: req.params.userId }).populate('car');
@@ -46,12 +46,34 @@ exports.getUserBookings = async (req, res) => {
     }
 };
 
-// @desc    Get all bookings for Admin (Used in admin.html)
 exports.getAllBookingsAdmin = async (req, res) => {
     try {
         const bookings = await Booking.find().populate('user', 'firstName lastName').populate('car', 'make model');
         res.json(bookings);
     } catch (err) {
         res.status(500).json({ error: err.message });
+    }
+};
+
+exports.deletebooking = async (req, res) => {
+    try {
+        
+        const booking = await Booking.findById(req.params.id);
+
+        if (!booking) {
+            return res.status(404).json({ msg: 'Booking record not found' });
+        }
+
+        if (booking.user.toString() !== req.user.id) {
+            return res.status(401).json({ msg: 'User not authorized to cancel this booking' });
+        }
+
+        
+        await Booking.findByIdAndDelete(req.params.id);
+
+        res.json({ msg: 'Booking cancelled successfully' });
+    } catch (err) {
+        console.error("Delete Error:", err.message);
+        res.status(500).json({ msg: 'Server Error', error: err.message });
     }
 };

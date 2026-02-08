@@ -1,6 +1,6 @@
 const Car = require('../models/Car');
 
-// @desc    Get all cars with optional filters (category, status)
+
 exports.getAllCars = async (req, res) => {
   try {
     const { category, status } = req.query;
@@ -16,7 +16,6 @@ exports.getAllCars = async (req, res) => {
   }
 };
 
-// @desc    Get a single car's details
 exports.getCarById = async (req, res) => {
   try {
     const car = await Car.findById(req.params.id);
@@ -27,7 +26,7 @@ exports.getCarById = async (req, res) => {
   }
 };
 
-// @desc    Add a new car (Admin Only)
+
 exports.addCar = async (req, res) => {
   try {
     const newCar = new Car(req.body);
@@ -38,7 +37,7 @@ exports.addCar = async (req, res) => {
   }
 };
 
-// @desc    Update car details (Admin Only)
+
 exports.updateCar = async (req, res) => {
   try {
     const updatedCar = await Car.findByIdAndUpdate(
@@ -52,7 +51,6 @@ exports.updateCar = async (req, res) => {
   }
 };
 
-// @desc    Delete a car (Admin Only)
 exports.deleteCar = async (req, res) => {
   try {
     await Car.findByIdAndDelete(req.params.id);

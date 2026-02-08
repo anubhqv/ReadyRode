@@ -1,123 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | ReadyRide</title>
-    <style>
-        /* CSS Matched with Premium Navy & Amber Theme */
-        :root {
-            --navy: #111827;
-            --amber: #fbbf24;
-            --white: #ffffff;
-            --gray: #f3f4f6;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Segoe UI", sans-serif; }
-
-        body {
-            min-height: 100vh;
-            background: var(--navy); /* Dark background like the hero section */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        /* Login Card */
-        .login-card {
-            background: var(--white);
-            padding: 40px;
-            width: 100%;
-            max-width: 400px;
-            border-radius: 12px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            text-align: center;
-        }
-
-        .login-card h1 {
-            color: var(--navy);
-            font-size: 28px;
-            margin-bottom: 10px;
-            font-weight: 800;
-        }
-
-        .login-card h1 span {
-            color: var(--amber); /* Brand Gold */
-        }
-
-        .login-card p {
-            color: #6b7280;
-            font-size: 14px;
-            margin-bottom: 30px;
-        }
-
-        /* Form Styling */
-        form div { margin-bottom: 20px; text-align: left; }
-        
-        label {
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: #4b5563;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            font-size: 15px;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        input:focus {
-            border-color: var(--navy);
-            box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.1);
-        }
-
-        /* Button Styling */
-        button {
-            width: 100%;
-            padding: 14px;
-            background: var(--navy);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 10px;
-        }
-
-        button:hover {
-            background: #1f2937;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        /* Links */
-        .footer-text {
-            margin-top: 25px;
-            font-size: 14px;
-            color: #374151;
-        }
-
-        .footer-text a {
-            color: var(--navy);
-            font-weight: bold;
-            text-decoration: none;
-            border-bottom: 2px solid var(--amber);
-        }
-
-        .footer-text a:hover {
-            color: #000;
-        }
-    </style>
+    <link rel="stylesheet" href="css/login.css">
 </head>
 
 <body>
@@ -143,41 +31,7 @@
         </div>
     </div>
 
-    <script>
-        const loginForm = document.getElementById('loginForm');
-        loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const formData = new FormData(loginForm);
-            const data = Object.fromEntries(formData);
-
-            try {
-                const response = await fetch('http://localhost:5000/api/auth/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-
-                const result = await response.json();
-
-                if (response.ok) {
-                    localStorage.setItem('token', result.token);
-                    localStorage.setItem('userId', result.user.id);
-                    localStorage.setItem('userName', result.user.name);
-                    localStorage.setItem('role', result.user.role);
-
-                    // Smooth redirection based on role
-                    if (result.user.role === 'admin') {
-                        window.location.href = 'admin.html';
-                    } else {
-                        window.location.href = 'index.html';
-                    }
-                } else {
-                    alert(result.msg || "Invalid Credentials");
-                }
-            } catch (error) {
-                alert("Server connection error. Please ensure backend is running.");
-            }
-        });
-    </script>
+    <script src="js/login.js"></script>
 </body>
+
 </html>

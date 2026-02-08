@@ -1,119 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Account | ReadyRide</title>
-    <style>
-        /* CSS Matched with Premium Navy & Amber Theme */
-        :root {
-            --navy: #111827;
-            --amber: #fbbf24;
-            --white: #ffffff;
-            --gray: #f3f4f6;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Segoe UI", sans-serif; }
-
-        body {
-            min-height: 100vh;
-            background: var(--navy); /* Deep dark background */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .signup-card {
-            background: var(--white);
-            padding: 40px;
-            width: 100%;
-            max-width: 480px;
-            border-radius: 12px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            text-align: center;
-        }
-
-        .signup-card h1 {
-            color: var(--navy);
-            font-size: 28px;
-            margin-bottom: 8px;
-            font-weight: 800;
-        }
-
-        .signup-card h1 span { color: var(--amber); }
-
-        .signup-card p {
-            color: #6b7280;
-            font-size: 14px;
-            margin-bottom: 25px;
-        }
-
-        /* Form Grid Layout */
-        form { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: left; }
-        .full-width { grid-column: span 2; }
-
-        label {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: #4b5563;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        input {
-            width: 100%;
-            padding: 11px 15px;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            font-size: 14px;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        input:focus {
-            border-color: var(--navy);
-            box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.1);
-        }
-
-        button {
-            grid-column: span 2;
-            width: 100%;
-            padding: 14px;
-            background: var(--navy);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 10px;
-        }
-
-        button:hover {
-            background: #1f2937;
-            transform: translateY(-2px);
-        }
-
-        button:disabled { background: #9ca3af; cursor: not-allowed; }
-
-        .footer-text {
-            grid-column: span 2;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #374151;
-            text-align: center;
-        }
-
-        .footer-text a {
-            color: var(--navy);
-            font-weight: bold;
-            text-decoration: none;
-            border-bottom: 2px solid var(--amber);
-        }
-    </style>
+    <link rel="stylesheet" href="css/signup.css">
 </head>
 
 <body>
@@ -155,43 +47,7 @@
         </form>
     </div>
 
-    <script>
-        const signupForm = document.getElementById('signupForm');
-        const submitBtn = document.getElementById('submitBtn');
-
-        signupForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            submitBtn.disabled = true;
-            submitBtn.innerText = "Creating Account...";
-
-            const formData = new FormData(signupForm);
-            const userData = Object.fromEntries(formData);
-
-            try {
-                const response = await fetch('http://localhost:5000/api/auth/register', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(userData)
-                });
-
-                const result = await response.json();
-
-                if (response.ok) {
-                    alert("Account created successfully! Let's get you logged in.");
-                    window.location.href = 'login.html';
-                } else {
-                    alert("Registration Failed: " + (result.msg || "Please check your details."));
-                    submitBtn.disabled = false;
-                    submitBtn.innerText = "Create Account";
-                }
-
-            } catch (error) {
-                alert("Server error. Is the backend running?");
-                submitBtn.disabled = false;
-                submitBtn.innerText = "Create Account";
-            }
-        });
-    </script>
+    <script src="js/signup.js"></script>
 </body>
+
 </html>

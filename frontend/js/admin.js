@@ -59,7 +59,7 @@ async function loadAllBookings() {
 document.getElementById('addCarForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.target));
-    const res = await fetch('http://localhost:5000/api/cars/add', {
+    const res = await fetch('readyrode-production.up.railway.app/api/cars/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-auth-token': token },
         body: JSON.stringify(data)

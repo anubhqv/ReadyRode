@@ -15,7 +15,8 @@ connectDB();
 // Middleware
 app.use(express.json());
 app.use(cors({
-  origin: 'http://127.0.0.1:5500',
+  origin;'https://dashing-mochi-5df461.netlify.app/'
+  //origin: 'http://127.0.0.1:5500',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'x-auth-token']
 }));

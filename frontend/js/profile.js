@@ -17,7 +17,7 @@ document.getElementById('userFields').innerHTML = `
 
 async function getMyBookings() {
     try {
-        const response = await fetch(`http://localhost:5000/api/bookings/user/${userId}`, {
+        const response = await fetch(`readyrode-production.up.railway.app/api/bookings/user/${userId}`, {
             headers: { 'x-auth-token': token }
         });
 
@@ -51,7 +51,7 @@ async function getMyBookings() {
 async function cancelBooking(bookingId) {
     if (confirm("Are you sure you want to cancel this booking?")) {
         try {
-            const res = await fetch(`http://localhost:5000/api/bookings/${bookingId}`, {
+            const res = await fetch(`readyrode-production.up.railway.app/api/bookings/${bookingId}`, {
                 method: 'DELETE',
                 headers: { 'x-auth-token': token }
             });

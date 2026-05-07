@@ -21,7 +21,8 @@ logoutBtn.addEventListener('click', () => {
 
 async function fetchCars() {
     try {
-        const response = await fetch('http://localhost:5000/api/cars');
+        //const response = await fetch('http://localhost:5000/api/cars');
+        const response = await fetch('readyrode-production.up.railway.app/cars');
         const cars = await response.json();
         const carContainer = document.getElementById('carList');
         carContainer.innerHTML = '';

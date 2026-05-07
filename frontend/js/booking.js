@@ -9,7 +9,7 @@ document.getElementById('endDate').setAttribute('min', today);
 
 async function loadCar() {
     try {
-        const res = await fetch(`http://localhost:5000/api/cars/${carId}`);
+        const res = await fetch(`readyrode-production.up.railway.app/cars/${carId}`);
         const car = await res.json();
         pricePerDay = car.pricePerDay;
         document.getElementById('carSummary').innerHTML = `
@@ -67,7 +67,7 @@ document.getElementById('bookingForm').addEventListener('submit', async e => {
     };
 
     try {
-        const res = await fetch('http://localhost:5000/api/bookings', {
+        const res = await fetch('readyrode-production.up.railway.app/bookings', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'x-auth-token': token },
             body: JSON.stringify(bookingData)

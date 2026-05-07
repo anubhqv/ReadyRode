@@ -9,7 +9,7 @@ if (!token || role !== 'admin') {
 
 async function loadFleet() {
     try {
-        const res = await fetch('http://localhost:5000/api/cars');
+        const res = await fetch('readyrode-production.up.railway.app/cars');
         const cars = await res.json();
         document.getElementById('fleetTable').innerHTML = cars.map(car => `
                     <tr>
@@ -23,7 +23,7 @@ async function loadFleet() {
 
 async function loadAllBookings() {
     try {
-        const res = await fetch('http://localhost:5000/api/bookings/admin/all', {
+        const res = await fetch('readyrode-production.up.railway.app/api/bookings/admin/all', {
             headers: { 'x-auth-token': token }
         });
 
@@ -74,7 +74,7 @@ document.getElementById('addCarForm').addEventListener('submit', async (e) => {
 
 async function deleteCar(id) {
     if (confirm("Are you sure?")) {
-        await fetch(`http://localhost:5000/api/cars/${id}`, {
+        await fetch(`readyrode-production.up.railway.app/cars/${id}`, {
             method: 'DELETE',
             headers: { 'x-auth-token': token }
         });
